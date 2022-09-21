@@ -10,7 +10,7 @@ namespace Prep3
             Random randomGenerator = new Random();
             int magicNumber = randomGenerator.Next(1,101);
 
-            int guess = -1
+            int guess = -1;
 
             Console.WriteLine("This is Prep 3");
 
@@ -20,6 +20,7 @@ namespace Prep3
             {
                 Console.Write("What is your guess? ");
                 guess = int.Parse(Console.ReadLine());
+                
 
                 if(magicNumber > guess)
                 {

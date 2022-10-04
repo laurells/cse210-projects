@@ -72,7 +72,7 @@ namespace unit02.Game
 
         }
 
-        /// Checks if the game should keep going, whether by a a score of 0 or by player choice
+        /// Checks if the game should keep going, whether by a score of 0 or by player choice
         public void GameCheck(){
             Console.WriteLine($"Your score is: {totalScore}");
             if (totalScore == 0){

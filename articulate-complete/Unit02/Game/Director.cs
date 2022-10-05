@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace Unit02.Game
 {
-    /// <summary>
+    
     /// A person who directs the game. 
     ///
     /// The responsibility of a Director is to control the sequence of play.
-    /// </summary>
+    
     public class Director
     {
         List<Die> _dice = new List<Die>();
@@ -16,9 +16,9 @@ namespace Unit02.Game
         int _score = 0;
         int _totalScore = 0;
 
-        /// <summary>
+        
         /// Constructs a new instance of Director.
-        /// </summary>
+        
         public Director()
         {
             for (int i = 0; i < 5; i++)
@@ -28,9 +28,9 @@ namespace Unit02.Game
             }
         }
 
-        /// <summary>
+        
         /// Starts the game by running the main game loop.
-        /// </summary>
+        
         public void StartGame()
         {
             while (_isPlaying)
@@ -41,9 +41,9 @@ namespace Unit02.Game
             }
         }
 
-        /// <summary>
+        
         /// Asks the user if they want to roll.
-        /// </summary>
+        
         public void GetInputs()
         {
             Console.Write("Roll dice? [y/n] ");
@@ -51,9 +51,9 @@ namespace Unit02.Game
             _isPlaying = (rollDice == "y");
         }
 
-        /// <summary>
+        
         /// Updates the player's score.
-        /// </summary>
+        
         public void DoUpdates()
         {
             if (!_isPlaying)
@@ -70,9 +70,9 @@ namespace Unit02.Game
             _totalScore += _score;
         }
 
-        /// <summary>
+        
         /// Displays the dice and the score. Also asks the player if they want to roll again. 
-        /// </summary>
+        
         public void DoOutputs()
         {
             if (!_isPlaying)

@@ -9,7 +9,7 @@ namespace Unit02
         ///Begins the Hi-Lo game by calling the Director class
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello To The Hilo Game!");
+            Console.WriteLine("Hello and Welcome To The Hilo Game!");
             Director player = new Director();
             player.StartGame();
         }

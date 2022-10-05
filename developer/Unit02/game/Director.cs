@@ -7,8 +7,8 @@ namespace unit02.Game
     {
         List<Card> cards = new List<Card>();
         bool isPlaying = true;
-        int winningbonus = 100;
-        int losingloss = 75;
+        int winBonus = 100;
+        int losingGame = 75;
         int totalScore = 300;
 
         int currentCard;
@@ -36,7 +36,7 @@ namespace unit02.Game
             }
         }
 
-        ///actual game, pulls card and asks for input regarding the card. Checks value compared to guess
+        ///Main game.The cards are pulled and the user is asked for an input. 
         public void MainGame(){
             Console.WriteLine($"The card is {currentCard}");
             if (!isPlaying)
@@ -48,23 +48,23 @@ namespace unit02.Game
                 card.getNewCard();
                 nextCard = card.cardValue;
             }
-            Console.Write("Higher or Lower: [h/l]  ");
+            Console.Write("Higher / Lower: [h/l]  ");
             string cardGuess = Console.ReadLine();
-            Console.WriteLine($"The next card was:{nextCard}");
+            Console.WriteLine($"The next card is:{nextCard}");
             if (cardGuess.Equals("h") && currentCard < nextCard){
-                totalScore += winningbonus;
+                totalScore += winBonus;
             }
             else if(cardGuess.Equals("l") && currentCard > nextCard){
-                totalScore += winningbonus;
+                totalScore += winBonus;
             }
             else if(cardGuess.Equals("h") && currentCard > nextCard){
-                totalScore -= losingloss;
+                totalScore -= losingGame;
                 if (totalScore < 0){
                     totalScore = 0;
                 }
             }
             else if(cardGuess.Equals("l") && currentCard < nextCard){
-                totalScore -= losingloss;
+                totalScore -= losingGame;
                 if (totalScore < 0){
                     totalScore = 0;
                 }
@@ -72,9 +72,9 @@ namespace unit02.Game
 
         }
 
-        /// Checks if the game should keep going, whether by a score of 0 or by player choice
+        /// Checks if the game should keep going
         public void GameCheck(){
-            Console.WriteLine($"Your score is: {totalScore}");
+            Console.WriteLine($"You have scored: {totalScore}");
             if (totalScore == 0){
                 isPlaying = false;
             }
@@ -86,7 +86,13 @@ namespace unit02.Game
             currentCard = nextCard;
             Console.Write("Keep Playing? [y/n] ");
             string rollDice = Console.ReadLine();
-            isPlaying = (rollDice == "y");
+            
+            if (rollDice == y){
+                isPlaying = true;
+            }
+            else if (rollDice == n){
+                isPlaying = false;
+            }
         }
     }
 }

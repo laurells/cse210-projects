@@ -1,6 +1,4 @@
-using System;
-using System.Collections.Generic;
-using Unit02;
+using Unit02.Game;
 
 
 namespace Unit02
@@ -9,9 +7,9 @@ namespace Unit02
     class Program
     {
         ///Begins the Hi-Lo game by calling the Director class
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Console.WriteLine("Hello!");
+            Console.WriteLine("Hello To The Hilo Game!");
             Director player = new Director();
             player.StartGame();
         }

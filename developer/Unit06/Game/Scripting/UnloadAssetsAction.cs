@@ -4,22 +4,23 @@ using Unit06.Game.Services;
 
 namespace Unit06.Game.Scripting
 {
-    public class UnloadAssetsAction : Action
+    public class ChangeSceneAction : Action
     {
-        private AudioService _audioService;
-        private VideoService _videoService;
-        
-        public UnloadAssetsAction(AudioService audioService, VideoService videoService)
+        private KeyboardService keyboardService;
+        private string nextScene;
+
+        public ChangeSceneAction(KeyboardService keyboardService, string nextScene)
         {
-            this._audioService = audioService;
-            this._videoService = videoService;
+            this.keyboardService = keyboardService;
+            this.nextScene = nextScene;
         }
 
         public void Execute(Cast cast, Script script, ActionCallback callback)
         {
-            _audioService.UnloadSounds();
-            _videoService.UnloadFonts();
-            _videoService.UnloadImages();
+            if (keyboardService.IsKeyPressed(Constants.ENTER))
+            {
+                callback.OnNext(nextScene);
+            }
         }
     }
 }

@@ -1,32 +1,47 @@
 using Unit06.Game.Casting;
 using Unit06.Game.Services;
+using Raylib_cs;
 
 
 namespace Unit06.Game.Scripting
 {
-    public class CollideRacketAction : Action
+    public class ControlRacketAction : Action
     {
-        private AudioService _audioService;
-        private PhysicsService _physicsService;
-        
-        public CollideRacketAction(PhysicsService physicsService, AudioService audioService)
+        private KeyboardService keyboardService;
+
+        public ControlRacketAction(KeyboardService keyboardService)
         {
-            this._physicsService = physicsService;
-            this._audioService = audioService;
+            this.keyboardService = keyboardService;
         }
 
         public void Execute(Cast cast, Script script, ActionCallback callback)
         {
-            Ball ball = (Ball)cast.GetFirstActor(Constants.BALL_GROUP);
             Racket racket = (Racket)cast.GetFirstActor(Constants.RACKET_GROUP);
-            Body ballBody = ball.GetBody();
-            Body racketBody = racket.GetBody();
-
-            if (_physicsService.HasCollided(racketBody, ballBody))
+            if (keyboardService.IsKeyDown(Constants.UP))
             {
-                ball.BounceY();
-                Sound sound = new Sound(Constants.BOUNCE_SOUND);
-                _audioService.PlaySound(sound);
+                racket.SwingUp();
+            }
+            else if (keyboardService.IsKeyDown(Constants.DOWN))
+            {
+                racket.SwingDown();
+            }
+            else
+            {
+                racket.StopMoving();
+            }
+
+            Racket racket2 = (Racket)cast.GetSecondActor(Constants.RACKET_GROUP);
+            if (keyboardService.IsKeyDown(Constants.UP2))
+            {
+                racket2.SwingUp();
+            }
+            else if (keyboardService.IsKeyDown(Constants.DOWN2))
+            {
+                racket2.SwingDown();
+            }
+            else
+            {
+                racket2.StopMoving();
             }
         }
     }

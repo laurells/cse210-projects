@@ -6,19 +6,19 @@ namespace Unit06.Game.Scripting
 {
     public class PlaySoundAction : Action
     {
-        private AudioService _audioService;
-        private string _filename;
+        private AudioService audioService;
+        private string filename;
 
         public PlaySoundAction(AudioService audioService, string filename)
         {
-            this._audioService = audioService;
-            this._filename = filename;
+            this.audioService = audioService;
+            this.filename = filename;
         }
 
         public void Execute(Cast cast, Script script, ActionCallback callback)
         {
-            Sound sound = new Sound(_filename);
-            _audioService.PlaySound(sound);
+            Sound sound = new Sound(filename);
+            audioService.PlaySound(sound);
             script.RemoveAction(Constants.OUTPUT, this);
         }
     }

@@ -6,11 +6,11 @@ namespace Unit06.Game.Scripting
 {
     public class DrawBallAction : Action
     {
-        private VideoService _videoService;
+        private VideoService videoService;
         
         public DrawBallAction(VideoService videoService)
         {
-            this._videoService = videoService;
+            this.videoService = videoService;
         }
 
         public void Execute(Cast cast, Script script, ActionCallback callback)
@@ -23,12 +23,12 @@ namespace Unit06.Game.Scripting
                 Rectangle rectangle = body.GetRectangle();
                 Point size = rectangle.GetSize();
                 Point pos = rectangle.GetPosition();
-                _videoService.DrawRectangle(size, pos, Constants.PURPLE, false);
+                videoService.DrawRectangle(size, pos, Constants.PURPLE, false);
             }
 
             Image image = ball.GetImage();
             Point position = body.GetPosition();
-            _videoService.DrawImage(image, position);
+            videoService.DrawImage(image, position);
         }
     }
 }

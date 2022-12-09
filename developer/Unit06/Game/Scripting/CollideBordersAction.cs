@@ -6,13 +6,13 @@ namespace Unit06.Game.Scripting
 {
     public class CollideBordersAction : Action
     {
-        private AudioService _audioService;
-        private PhysicsService _physicsService;
+        private AudioService audioService;
+        private PhysicsService physicsService;
         
         public CollideBordersAction(PhysicsService physicsService, AudioService audioService)
         {
-            this._physicsService = physicsService;
-            this._audioService = audioService;
+            this.physicsService = physicsService;
+            this.audioService = audioService;
         }
 
         public void Execute(Cast cast, Script script, ActionCallback callback)
@@ -27,35 +27,22 @@ namespace Unit06.Game.Scripting
 
             if (x < Constants.FIELD_LEFT)
             {
-                ball.BounceX();
-                _audioService.PlaySound(bounceSound);
             }
             else if (x >= Constants.FIELD_RIGHT - Constants.BALL_WIDTH)
             {
-                ball.BounceX();
-                _audioService.PlaySound(bounceSound);
             }
 
             if (y < Constants.FIELD_TOP)
             {
                 ball.BounceY();
-                _audioService.PlaySound(bounceSound);
+                audioService.PlaySound(bounceSound);
             }
             else if (y >= Constants.FIELD_BOTTOM - Constants.BALL_WIDTH)
             {
-                Stats stats = (Stats)cast.GetFirstActor(Constants.STATS_GROUP);
-                stats.RemoveLife();
-
-                if (stats.GetLives() > 0)
-                {
-                    callback.OnNext(Constants.TRY_AGAIN);
-                }
-                else
-                {
-                    callback.OnNext(Constants.GAME_OVER);
-                    _audioService.PlaySound(overSound);
-                }
+                ball.BounceY();
+                audioService.PlaySound(bounceSound);
             }
+            
         }
     }
 }

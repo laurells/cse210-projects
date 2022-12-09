@@ -6,19 +6,19 @@ namespace Unit06.Game.Scripting
 {
     public class ReleaseDevicesAction : Action
     {
-        private AudioService _audioService;
-        private VideoService _videoService;
+        private AudioService audioService;
+        private VideoService videoService;
         
         public ReleaseDevicesAction(AudioService audioService, VideoService videoService)
         {
-            this._audioService = audioService;
-            this._videoService = videoService;
+            this.audioService = audioService;
+            this.videoService = videoService;
         }
 
         public void Execute(Cast cast, Script script, ActionCallback callback)
         {
-            _audioService.Release();
-            _videoService.Release();
+            audioService.Release();
+            videoService.Release();
         }
     }
 }

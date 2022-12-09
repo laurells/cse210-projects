@@ -8,7 +8,7 @@ namespace Unit06.Game.Scripting
     /// </summary>
     public class Script
     {
-        private Dictionary<string, List<Action>> _actions = new Dictionary<string, List<Action>>();
+        private Dictionary<string, List<Action>> actions = new Dictionary<string, List<Action>>();
 
         /// <summary>
         /// Constructs a new instance of Script.
@@ -24,14 +24,14 @@ namespace Unit06.Game.Scripting
         /// <param name="action">The action to add.</param>
         public void AddAction(string group, Action action)
         {
-            if (!_actions.ContainsKey(group))
+            if (!actions.ContainsKey(group))
             {
-                _actions[group] = new List<Action>();
+                actions[group] = new List<Action>();
             }
 
-            if (!_actions[group].Contains(action))
+            if (!actions[group].Contains(action))
             {
-                _actions[group].Add(action);
+                actions[group].Add(action);
             }
         }
 
@@ -41,9 +41,9 @@ namespace Unit06.Game.Scripting
         /// <param name="group">The given group.</param>
         public void ClearActions(string group)
         {
-            if (_actions.ContainsKey(group))
+            if (actions.ContainsKey(group))
             {
-                _actions[group] = new List<Action>();
+                actions[group] = new List<Action>();
             }
         }
 
@@ -52,9 +52,9 @@ namespace Unit06.Game.Scripting
         /// </summary>
         public void ClearAllActions()
         {
-            foreach(string group in _actions.Keys)
+            foreach(string group in actions.Keys)
             {
-                _actions[group] = new List<Action>();
+                actions[group] = new List<Action>();
             }
         }
 
@@ -66,9 +66,9 @@ namespace Unit06.Game.Scripting
         public List<Action> GetActions(string group)
         {
             List<Action> results = new List<Action>();
-            if (_actions.ContainsKey(group))
+            if (actions.ContainsKey(group))
             {
-                results.AddRange(_actions[group]);
+                results.AddRange(actions[group]);
             }
             return results;
         }
@@ -80,9 +80,9 @@ namespace Unit06.Game.Scripting
         /// <param name="action">The action to remove.</param>
         public void RemoveAction(string group, Action action)
         {
-            if (_actions.ContainsKey(group))
+            if (actions.ContainsKey(group))
             {
-                _actions[group].Remove(action);
+                actions[group].Remove(action);
             }
         }
 

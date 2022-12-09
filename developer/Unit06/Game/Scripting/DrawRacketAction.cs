@@ -6,11 +6,11 @@ namespace Unit06.Game.Scripting
 {
     public class DrawRacketAction : Action
     {
-        private VideoService _videoService;
+        private VideoService videoService;
         
         public DrawRacketAction(VideoService videoService)
         {
-            this._videoService = videoService;
+            this.videoService = videoService;
         }
 
         public void Execute(Cast cast, Script script, ActionCallback callback)
@@ -23,13 +23,22 @@ namespace Unit06.Game.Scripting
                 Rectangle rectangle = body.GetRectangle();
                 Point size = rectangle.GetSize();
                 Point pos = rectangle.GetPosition();
-                _videoService.DrawRectangle(size, pos, Constants.PURPLE, false);
+                videoService.DrawRectangle(size, pos, Constants.PURPLE, false);
             }
 
             Animation animation = racket.GetAnimation();
             Image image = animation.NextImage();
             Point position = body.GetPosition();
-            _videoService.DrawImage(image, position);
+            videoService.DrawImage(image, position);
+
+            Racket racket2 = (Racket)cast.GetSecondActor(Constants.RACKET_GROUP);
+            Body body2 = racket2.GetBody();
+
+            Animation animation2 = racket2.GetAnimation();
+            Image image2 = animation2.NextImage();
+            Point position2 = body2.GetPosition();
+            videoService.DrawImage(image2, position2);
+
         }
     }
 }

@@ -1,48 +1,45 @@
 using Unit06.Game.Casting;
 using Unit06.Game.Services;
-using Raylib_cs;
 
 
 namespace Unit06.Game.Scripting
 {
-    public class ControlRacketAction : Action
+    public class CollideRacketAction : Action
     {
-        private KeyboardService keyboardService;
-
-        public ControlRacketAction(KeyboardService keyboardService)
+        private AudioService audioService;
+        private PhysicsService physicsService;
+        
+        public CollideRacketAction(PhysicsService physicsService, AudioService audioService)
         {
-            this.keyboardService = keyboardService;
+            this.physicsService = physicsService;
+            this.audioService = audioService;
         }
 
         public void Execute(Cast cast, Script script, ActionCallback callback)
         {
+            Ball ball = (Ball)cast.GetFirstActor(Constants.BALL_GROUP);
             Racket racket = (Racket)cast.GetFirstActor(Constants.RACKET_GROUP);
-            if (keyboardService.IsKeyDown(Constants.UP))
+            Body ballBody = ball.GetBody();
+            Body racketBody = racket.GetBody();
+
+            if (physicsService.HasCollided(racketBody, ballBody))
             {
-                racket.SwingUp();
-            }
-            else if (keyboardService.IsKeyDown(Constants.DOWN))
-            {
-                racket.SwingDown();
-            }
-            else
-            {
-                racket.StopMoving();
+                ball.BounceX();
+                Sound sound = new Sound(Constants.BOUNCE_SOUND);
+                audioService.PlaySound(sound);
             }
 
             Racket racket2 = (Racket)cast.GetSecondActor(Constants.RACKET_GROUP);
-            if (keyboardService.IsKeyDown(Constants.UP2))
+            Body racketBody2 = racket2.GetBody();
+            
+            if (physicsService.HasCollided(racketBody2, ballBody))
             {
-                racket2.SwingUp();
+                ball.BounceX();
+                Sound sound = new Sound(Constants.BOUNCE_SOUND);
+                audioService.PlaySound(sound);
             }
-            else if (keyboardService.IsKeyDown(Constants.DOWN2))
-            {
-                racket2.SwingDown();
-            }
-            else
-            {
-                racket2.StopMoving();
-            }
+
+
         }
     }
 }
